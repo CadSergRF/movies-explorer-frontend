@@ -44,14 +44,19 @@
 }
 
 .filter__checkbox:checked::after {
-  /* height: 16px;
-  width: 16px;
-  position: absolute;
-  top: 2px;
-  right: 2px; */
   background-color: #fff;
-  /* content: '';
-  border-radius: 50%; */
   transition: 0.4s ease;
   transform: translate(16px);
+}
+
+@media screen and (max-width: 700px) {
+  .filter {
+    margin: 0 auto;
+    height: 20px;
+    padding: 0;
+  }
+
+  .filter__text {
+    font-size: 11px;
+  }
 }

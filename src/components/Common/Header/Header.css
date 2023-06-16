@@ -42,9 +42,24 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 800px) {
+  .header {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding: 0 14px;
+  }
+
+  .header__auth {
+    grid-gap: 14px;
+  }
+
   .header__text {
     font-size: 10px;
+    line-height: 16px;
   }
 
   .header__btn {
