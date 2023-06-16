@@ -1,0 +1,127 @@
+.profile {
+  box-sizing: border-box;
+  padding: 74px 70px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 123px
+}
+
+.profile__title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.profile__form {
+  min-height: calc(100vh - 74px - 74px - 70px - 29px - 123px);
+  /* высота - хедер - пад_топ - пад_бот - title - gap */
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+}
+
+.profile__inputs {
+  width: 100%;
+  max-width: 410px;
+}
+
+.profile__field {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  min-height: 30px;
+  cursor: text;
+}
+
+.profile__input {
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  border: none;
+  outline: none;
+}
+
+.profile__spacer {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 17px;
+}
+
+.profile__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile__btn {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profile__btn_logout {
+  color: #ee3465;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+  .profile {
+    gap: 96px;
+  }
+
+  .profile__form {
+    min-height: calc(100vh - 74px - 269px - 236px - 29px - 96px);
+    /* высота - хедер - пад_топ - пад_бот - title - gap */
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  .profile {
+    gap: 96px;
+  }
+
+  .profile__form {
+    min-height: calc(100vh - 74px - 269px - 236px - 29px - 96px);
+    /* высота - хедер - пад_топ - пад_бот - title - gap */
+  }
+
+  .profile__buttons {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .profile {
+    padding: 70px 30px 40px;
+    gap: 80px;
+  }
+
+  .profile__form {
+    min-height: calc(100vh - 74px - 70px - 40px - 29px - 80px);
+    /* высота - хедер - пад_топ - пад_бот - title - gap */
+  }
+
+  .profile__buttons {
+    margin-top: 379px;
+  }
+}
