@@ -16,8 +16,8 @@
   padding: 0;
   border: none;
   border-radius: 10px;
-  background: #e8e8e8;
-  color: #000;
+  background: var(--bg-color-second);
+  color: var(--text-color-main);
   text-decoration: none;
   font-family: 'Inter';
   font-style: normal;
@@ -33,7 +33,7 @@
   transform: scale(1.1);
   transition-duration: .5s;
   cursor: pointer;
-  background: #2be080;
+  background: var(--theme-main-color);
 }
 
 @media screen and (max-width: 420px) {

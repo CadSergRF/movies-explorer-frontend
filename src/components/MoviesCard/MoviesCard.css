@@ -31,14 +31,14 @@
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
-  color: #A0A0A0;
+  color: var(--text-color-first);
 }
 
 .card__btn {
   padding: 0;
   width: 30px;
   height: 30px;
-  background: #f9f9f9;
+  background: var(--btn-color-nav);
   border: none;
   border-radius: 50px;
   background-position: center;
@@ -51,7 +51,7 @@
 }
 
 .card__btn_save_active {
-  background-color: #2be080;
+  background-color: var(--theme-main-color);
   background-image: url(../../images/saved-icon.svg);
 }
 

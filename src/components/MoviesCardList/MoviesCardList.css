@@ -22,7 +22,7 @@
   width: 320px;
   height: 36px;
   background-color: transparent;
-  border-color: #e8e8e8;
+  border-color: var(--bg-color-second);
   border-radius: 5px;
   cursor: pointer;
   font-family: 'Inter';

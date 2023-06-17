@@ -10,7 +10,7 @@
   font-size: 13px;
   line-height: 18px;
   text-decoration: none;
-  color: #000;
+  color: var(--text-color-main);
 }
 
 .navigation__link_active {
@@ -21,7 +21,7 @@
   width: 100px;
   height: 32px;
   border-radius: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--btn-color-nav);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  color: #000;
+  color: var(--text-color-main);
 }
 
 .burger-menu {

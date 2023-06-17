@@ -15,12 +15,8 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = false;  // Для эмуляции логина
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-
-  function handleLogin() {
-    setIsLoggedIn(true)
-  }
 
   function handleBurgerOpen() {
     setIsBurgerOpen(true)
@@ -63,15 +59,11 @@ function App() {
         />
         <Route
           path="/signin"
-          element={<Login
-            onSubmit={handleLogin}
-          />}
+          element={<Login />}
         />
         <Route
           path="/signup"
-          element={<Register
-            onSubmit={handleLogin}
-          />}
+          element={<Register />}
         />
         <Route
           path="/*"

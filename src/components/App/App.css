@@ -1,6 +1,6 @@
 .root {
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: var(--bg-color-main);
   min-height: 100vh;
   margin: 0 auto;
   max-width: 1280px;

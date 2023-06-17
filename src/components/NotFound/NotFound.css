@@ -32,7 +32,7 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #2be080;
+  color: var(--theme-main-color);
   cursor: pointer;
 }
 

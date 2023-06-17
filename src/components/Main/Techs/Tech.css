@@ -1,6 +1,6 @@
 .tech {
   padding: 100px 70px;
-  background-color: #f5f5f5;
+  background-color: var(--bg-color-first);
   min-height: 415px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   font-size: 22px;
   line-height: 27px;
   letter-spacing: -0.04em;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid var(--text-color-main);
 }
 
 .tech__name {
@@ -61,8 +61,8 @@
   padding: 0;
   border: none;
   border-radius: 10px;
-  background: #e8e8e8;
-  color: #000;
+  background: var(--bg-color-second);
+  color: var(--text-color-main);
   text-decoration: none;
   font-family: 'Inter';
   font-style: normal;
@@ -79,7 +79,7 @@
   transform: scale(1.1);
   transition-duration: .5s;
   cursor: pointer;
-  background: #2be080;
+  background: var(--theme-main-color);
 }
 
 @media screen and (max-width: 1020px) {

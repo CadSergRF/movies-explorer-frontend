@@ -28,8 +28,8 @@
   flex-direction: column;
   font-style: normal;
   font-weight: 500;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--bg-color-main);
+  color: var(--text-color-main);
   padding: 27px 27px 90px;
   transition: right .3s linear;
 }
@@ -68,12 +68,12 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
-  color: #000;
+  color: var(--text-color-main);
   cursor: pointer;
 }
 
 .burger__link_active {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--text-color-main);
 }
 
 .burger__link:hover {
@@ -87,7 +87,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  color: #000;
+  color: var(--text-color-main);
   text-decoration: none;
 }
 
