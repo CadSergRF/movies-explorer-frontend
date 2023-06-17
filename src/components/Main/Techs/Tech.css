@@ -76,10 +76,7 @@
 }
 
 .tech__list-link:hover {
-  transform: scale(1.1);
-  transition-duration: .5s;
-  cursor: pointer;
-  background: var(--theme-main-color);
+  opacity: .7;
 }
 
 @media screen and (max-width: 1020px) {
