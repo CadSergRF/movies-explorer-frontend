@@ -1,7 +1,8 @@
 .header {
   max-width: 100%;
   display: grid;
-  grid-template-columns: min-content min-content;
+  grid-template-columns: min-content 1fr;
+  gap: 44px;
   align-items: center;
   justify-content: space-between;
   height: 74px;
@@ -15,7 +16,7 @@
 
 .header__auth {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   grid-gap: 30px;
 }
@@ -23,6 +24,7 @@
 .header__link {
   text-decoration: none;
   color: #000;
+  justify-self: end;
 }
 
 .header__text {

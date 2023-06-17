@@ -1,5 +1,5 @@
 
-
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
@@ -10,10 +10,25 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../AuthComponents/Profile/Profile';
 import Login from '../AuthComponents/Login/Login';
 import Register from '../AuthComponents/Register/Register';
+import NotFound from '../NotFound/NotFound';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 function App() {
 
-  const isLoggedIn = false;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+
+  function handleLogin() {
+    setIsLoggedIn(true)
+  }
+
+  function handleBurgerOpen() {
+    setIsBurgerOpen(true)
+  }
+
+  function handleBurgerClose() {
+    setIsBurgerOpen(false)
+  }
 
   return (
     <div className="root">
@@ -22,31 +37,52 @@ function App() {
           path="/"
           element={<Main
             isLoggedIn={isLoggedIn}
+            onBurgerOpen={handleBurgerOpen}
           />}
         />
         <Route
           path="/movies"
-          element={<Movies />}
+          element={<Movies
+            isLoggedIn={isLoggedIn}
+            onBurgerOpen={handleBurgerOpen}
+          />}
         />
         <Route
           path="/saved-movies"
-          element={<SavedMovies />}
+          element={<SavedMovies
+            isLoggedIn={isLoggedIn}
+            onBurgerOpen={handleBurgerOpen}
+          />}
         />
         <Route
           path="/profile"
           element={<Profile
             isLoggedIn={isLoggedIn}
+            onBurgerOpen={handleBurgerOpen}
           />}
         />
         <Route
           path="/signin"
-          element={<Login />}
+          element={<Login
+            onSubmit={handleLogin}
+          />}
         />
         <Route
           path="/signup"
-          element={<Register />}
+          element={<Register
+            onSubmit={handleLogin}
+          />}
+        />
+        <Route
+          path="/*"
+          element={<NotFound />}
         />
       </Routes>
+      <BurgerMenu
+        isOpen={isBurgerOpen}
+        onOpen={handleBurgerOpen}
+        onClose={handleBurgerClose}
+      />
     </div>
   );
 }

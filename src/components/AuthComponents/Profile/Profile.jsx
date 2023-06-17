@@ -2,11 +2,14 @@ import React from 'react';
 import './Profile.css';
 import Header from '../../Common/Header/Header';
 
-const Profile = ({ isLoggedIn }) => {
+const Profile = ({ isLoggedIn, onBurgerOpen }) => {
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header
+        isLoggedIn={isLoggedIn}
+        onBurgerOpen={onBurgerOpen}
+      />
       <section className="profile">
         <h3 className="profile__title">Привет, Сергей!</h3>
         <form className="profile__form">

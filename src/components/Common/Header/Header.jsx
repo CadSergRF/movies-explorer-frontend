@@ -3,22 +3,23 @@ import './Header.css';
 import React from 'react';
 import logo from '../../../images/logo.svg';
 import Navigation from '../Navigation/Navigation';
+import AuthHeader from '../../AuthComponents/AuthHeader/AuthHeader';
+import { Link } from 'react-router-dom';
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ isLoggedIn, onBurgerOpen }) => {
 
   return (
     <header className="header">
-      <a href="/" className="logo" >
+      <Link to="/" className="logo" >
         <img src={logo} alt="Логотип" />
-      </a>
+      </Link>
       <nav className="header__auth">
         {!isLoggedIn ? (
-          <>
-            <a href="/signup" className="header__link header__text">Регистрация</a>
-            <button className="header__btn header__text">Войти</button>
-          </>
+          <AuthHeader />
         ) : (
-          <Navigation />
+          <Navigation
+            onBurgerOpen={onBurgerOpen}
+          />
         )
         }
 

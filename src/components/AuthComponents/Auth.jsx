@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import './Auth.css';
 import logo from '../../images/logo.svg';
 
-const Auth = ({ title, btnText, question, link, linkText, children }) => {
+const Auth = ({ title, btnText, question, link, linkText, onSubmit, children }) => {
   return (
     <section className="auth__container">
       <Link to="/" className="auth__logo">
         <img src={logo} alt="логотип" />
       </Link>
       <h3 className="auth__title">{title}</h3>
-      <form className="auth-form">
+      <form
+        className="auth-form"
+        onSubmit={onSubmit}
+      >
         {children}
         <button type="submit" className="auth-form__btn">
           {btnText}

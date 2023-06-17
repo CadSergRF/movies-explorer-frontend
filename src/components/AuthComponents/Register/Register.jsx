@@ -2,7 +2,7 @@ import React from 'react';
 import '../Auth.css';
 import Auth from '../Auth';
 
-const Register = () => {
+const Register = ({ onSubmit }) => {
   return (
     <Auth
       title="Добро пожаловать!"
@@ -10,6 +10,7 @@ const Register = () => {
       question="Уже зарегистрированы?"
       link="/signin"
       linkText="Войти"
+      onSubmit={onSubmit}
     >
       <label className="auth__field">
         Имя
