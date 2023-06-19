@@ -10,7 +10,7 @@ const Profile = ({ isLoggedIn, onBurgerOpen }) => {
         isLoggedIn={isLoggedIn}
         onBurgerOpen={onBurgerOpen}
       />
-      <section className="profile">
+      <main className="profile">
         <h3 className="profile__title">Привет, Сергей!</h3>
         <form className="profile__form">
           <div className="profile__inputs">
@@ -51,7 +51,7 @@ const Profile = ({ isLoggedIn, onBurgerOpen }) => {
             </button>
           </div>
         </form>
-      </section>
+      </main>
     </>
   )
 }

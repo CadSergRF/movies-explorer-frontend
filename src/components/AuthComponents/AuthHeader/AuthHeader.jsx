@@ -5,7 +5,7 @@ const AuthHeader = () => {
   return (
     <>
       <Link to="/signup" className="header__link header__text">Регистрация</Link>
-      <button className="header__btn header__text">Войти</button>
+      <Link to="/signin" className="header__btn header__text">Войти</Link>
     </>
   )
 }

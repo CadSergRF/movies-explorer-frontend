@@ -15,7 +15,7 @@ const MoviesCardList = ({ cards, isSavedMovie }) => {
       </ul>
       {(pathname === '/movies')
         && (<div className="cards__btn-container">
-          <button className="cards__btn">Ещё</button>
+          <button className="cards__btn" type="button">Ещё</button>
         </div>)
       }
 

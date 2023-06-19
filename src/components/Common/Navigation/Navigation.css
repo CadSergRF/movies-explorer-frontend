@@ -4,7 +4,7 @@
 }
 
 .navigation__link {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -26,7 +26,7 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

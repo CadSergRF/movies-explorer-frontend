@@ -12,8 +12,10 @@ const SearchForm = () => {
             name="query"
             className="search__input"
             id="search-input"
-            type="text"
-            placeholder="Фильм">
+            type="search"
+            placeholder="Фильм"
+            required
+          >
           </input>
           <button className="search__button" type="submit"></button>
         </form>

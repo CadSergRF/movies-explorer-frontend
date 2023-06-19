@@ -9,6 +9,7 @@
   --text-color-main: #000;
   --text-color-first: #a0a0a0;
   --text-color-errors: #ee3465;
+  --theme-font: 'Inter', 'Arial', sans-serif;
 }
 
 .hover__link:hover {

@@ -14,8 +14,10 @@ const Movies = ({ isLoggedIn, onBurgerOpen }) => {
         isLoggedIn={isLoggedIn}
         onBurgerOpen={onBurgerOpen}
       />
-      <SearchForm />
-      <MoviesCardList cards={movies} isSavedMovie={isSavedMovie} />
+      <main>
+        <SearchForm />
+        <MoviesCardList cards={movies} isSavedMovie={isSavedMovie} />
+      </main>
       <Footer />
     </>
   )

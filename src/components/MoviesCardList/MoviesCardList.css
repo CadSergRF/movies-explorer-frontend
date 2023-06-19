@@ -18,18 +18,22 @@
 }
 
 .cards__btn {
-  box-sizing: border-box;
   width: 320px;
   height: 36px;
+  padding: 0;
   background-color: transparent;
-  border-color: var(--bg-color-second);
+  border: 2px solid var(--bg-color-second);
   border-radius: 5px;
   cursor: pointer;
-  font-family: 'Inter';
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 15px;
+  line-height: 14.5px;
+}
+
+.cards__btn:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 1180px) {

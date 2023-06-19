@@ -63,7 +63,7 @@
 
 .burger__link {
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -82,7 +82,7 @@
 
 .burger__profile {
   align-self: center;
-  font-family: 'Inter';
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

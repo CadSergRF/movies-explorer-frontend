@@ -5,10 +5,10 @@ import { Link, NavLink } from 'react-router-dom';
 const BurgerMenu = ({ isOpen, onOpen, onClose }) => {
   return (
     <div
-      className={`burger ${isOpen && "burger_opened"}`}
+      className={`burger ${isOpen ? "burger_opened" : ""}`}
       onMouseDown={(evt) => evt.target === evt.currentTarget && onClose()}
     >
-      <div className={`burger__container ${isOpen && "burger__container_opened"}`}>
+      <div className={`burger__container ${isOpen ? "burger__container_opened" : ""}`}>
         <button
           className="burger__close-btn"
           type="button"

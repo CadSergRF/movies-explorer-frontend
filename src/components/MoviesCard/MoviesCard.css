@@ -18,7 +18,7 @@
 
 .card__text {
   margin: 0;
-  font-family: 'Inter';
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -26,7 +26,7 @@
 }
 
 .card__time {
-  font-family: 'Inter';
+  font-family: var(--theme-font);
   font-style: normal;
   font-weight: 400;
   font-size: 11px;

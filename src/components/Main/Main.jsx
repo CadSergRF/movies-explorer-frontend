@@ -11,18 +11,20 @@ import Footer from '../Common/Footer/Footer';
 const Main = ({ isLoggedIn, onBurgerOpen }) => {
 
   return (
-    <main>
+    <>
       <Header
         isLoggedIn={isLoggedIn}
         onBurgerOpen={onBurgerOpen}
       />
-      <Promo />
-      <AboutProject />
-      <Tech />
-      <AboutMe />
-      <Portfolio />
+      <main>
+        <Promo />
+        <AboutProject />
+        <Tech />
+        <AboutMe />
+        <Portfolio />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
 
