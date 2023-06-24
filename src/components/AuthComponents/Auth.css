@@ -47,6 +47,7 @@
   line-height: 17px;
   text-align: center;
   cursor: pointer;
+  position: relative;
 }
 
 .auth-form__btn:hover {
@@ -55,7 +56,18 @@
 
 .auth-form__btn_disabled {
   pointer-events: none;
-  background: var(--btn-color-nav);
+  background-color: var(--text-color-first);
+}
+
+.auth-form__btn-error {
+  position: absolute;
+  color: var(--text-color-errors);
+  display: block;
+  width: 100%;
+  bottom: calc(100% + 10px);
+  left: 0;
+  font-size: 12px;
+  pointer-events: none;
 }
 
 .auth-form__text {
@@ -120,6 +132,16 @@
 
 .auth__input-error_active {
   visibility: visible;
+}
+
+.auth__span-error {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  color: var(--text-color-errors);
+  font-size: 10px;
+  line-height: 1.2;
+  display: block;
 }
 
 @media screen and (max-width: 1023px) {

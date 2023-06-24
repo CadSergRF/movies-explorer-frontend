@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Profile.css';
 import Header from '../../Common/Header/Header';
+import { CurrentUserContext } from '../../../contexts/CurrentUserContext';
 
-const Profile = ({ isLoggedIn, onBurgerOpen }) => {
+const Profile = ({ onSignOut, isLoggedIn, onBurgerOpen }) => {
+
+  const currentUserData = useContext(CurrentUserContext);
 
   return (
     <>
@@ -17,7 +20,7 @@ const Profile = ({ isLoggedIn, onBurgerOpen }) => {
             <label className="profile__field">
               Имя
               <input
-                value="Сергей"
+                value={currentUserData.name}
                 name="name"
                 className="profile__input"
                 id="name-input"
@@ -31,8 +34,8 @@ const Profile = ({ isLoggedIn, onBurgerOpen }) => {
             <label className="profile__field">
               E-mail
               <input
-                value="pochta@yandex.ru"
-                name="name"
+                value={currentUserData.email}
+                name="email"
                 className="profile__input"
                 id="name-input"
                 type="text"
@@ -46,7 +49,11 @@ const Profile = ({ isLoggedIn, onBurgerOpen }) => {
             <button type="submit" className="profile__btn">
               Редактировать
             </button>
-            <button className="profile__btn profile__btn_logout">
+            <button
+              type="button"
+              className="profile__btn profile__btn_logout"
+              onClick={onSignOut}
+            >
               Выйти из аккаунта
             </button>
           </div>
