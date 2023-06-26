@@ -24,7 +24,7 @@ const useAuthForm = () => {
 
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: event.target.validationMessage });
-    setIsFormValid(event.target.closest('#form').checkValidity());
+    setIsFormValid(event.target.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
@@ -38,6 +38,7 @@ const useAuthForm = () => {
 
   return {
     values,
+    setValues,
     errors,
     handleChange,
     isFormValid,

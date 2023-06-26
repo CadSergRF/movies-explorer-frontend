@@ -22,7 +22,6 @@ const Auth = ({
       </Link>
       <h3 className="auth__title">{title}</h3>
       <form
-        id="form"
         className="auth-form"
         onSubmit={onSubmit}
         noValidate

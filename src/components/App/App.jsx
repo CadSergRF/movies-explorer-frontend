@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import './App.css';
@@ -16,15 +16,19 @@ import Login from '../AuthComponents/Login/Login';
 import Register from '../AuthComponents/Register/Register';
 import NotFound from '../NotFound/NotFound';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import ProtectedRoute from '../Common/ProtectedRoute/ProtectedRoute';
+
+import { FILMS_URL_PREVIEW } from '../../utils/constants';
 
 function App() {
 
-  // const isLoggedIn = false;  // Для эмуляции логина
-  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [currentUser, setCurrentUser] = useState({});
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [savedCards, setSavedCards] = useState([]);
 
   const navigate = useNavigate();
 
@@ -61,7 +65,6 @@ function App() {
       const loginData = await mainApi.authorize({ email, password });
       if (loginData) {
         setIsLoggedIn(true);
-        navigate("/movies", { replace: true });
         checkLogin();
       }
     } catch (err) {
@@ -72,16 +75,23 @@ function App() {
     }
   }
 
+  // проверка авторизации
   const checkLogin = useCallback(async () => {
     try {
       const userCokkies = await mainApi.checkCookies();
       setCurrentUser(userCokkies);
       setIsLoggedIn(true);
+      navigate("/movies", { replace: true });
     } catch (err) {
       console.error(err);
     }
-  }, [])
+  }, [navigate])
 
+  useEffect(() => {
+    checkLogin();
+  }, []);
+
+  // logout
   const handleUserSignOut = async () => {
     try {
       await mainApi.logout();
@@ -91,6 +101,59 @@ function App() {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  // обновить данные пользователя
+  const handleUpdateUser = async (userData) => {
+    try {
+      const newUserData = await mainApi.updateUserInfo(userData);
+      setCurrentUser(newUserData);
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000);
+    } catch (err) {
+      setErrorMessage(err);
+      console.error(err);
+    }
+  }
+
+  const handleSaveCard = async (card) => {
+    try {
+      const savedCard = await mainApi.createCard({
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: `${FILMS_URL_PREVIEW}${card.image.url}`,
+        trailerLink: card.trailerLink,
+        thumbnail: `${FILMS_URL_PREVIEW}${card.image.formats.thumbnail.url}`,
+        movieId: card.id,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN,
+      });
+      setSavedCards([savedCard, ...savedCards])
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  const handleDeleteMovie = async (movie) => {
+    try {
+      const movieOnDelete = savedMovies.find(
+        (m) => m.movieId === (movie.id || movie.movieId)
+      );
+      const deleteMovie = await mainApi.deleteCard(movieOnDelete._id);
+      if (deleteMovie) {
+        const newStateSavedMovies = savedMovies.filter((m) => m.movieId !== movie.id);
+        setSavedMovies(newStateSavedMovies);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   return (
@@ -106,25 +169,35 @@ function App() {
           />
           <Route
             path="/movies"
-            element={<Movies
-              isLoggedIn={isLoggedIn}
-              onBurgerOpen={handleBurgerOpen}
-            />}
+            element={
+              <ProtectedRoute
+                element={Movies}
+                isLoggedIn={isLoggedIn}
+                onBurgerOpen={handleBurgerOpen}
+              />}
           />
           <Route
             path="/saved-movies"
-            element={<SavedMovies
-              isLoggedIn={isLoggedIn}
-              onBurgerOpen={handleBurgerOpen}
-            />}
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                isLoggedIn={isLoggedIn}
+                onBurgerOpen={handleBurgerOpen}
+              />}
           />
           <Route
             path="/profile"
-            element={<Profile
-              onSignOut={handleUserSignOut}
-              isLoggedIn={isLoggedIn}
-              onBurgerOpen={handleBurgerOpen}
-            />}
+            element={
+              <ProtectedRoute
+                element={Profile}
+                onEditProfile={handleUpdateUser}
+                onSignOut={handleUserSignOut}
+                onLoading={isLoading}
+                isLoggedIn={isLoggedIn}
+                onBurgerOpen={handleBurgerOpen}
+                isSuccess={isSuccess}
+                errorMessage={errorMessage}
+              />}
           />
           <Route
             path="/signin"

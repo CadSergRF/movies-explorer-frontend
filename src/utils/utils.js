@@ -1,4 +1,4 @@
-import { BASE_URL_AUTH } from './constants';
+import { BASE_URL_AUTH, SHORT_FILM_DURATION } from './constants';
 
 export const _responceProcessing = (res) => (res.ok)
   ? res.json()
@@ -16,3 +16,18 @@ export function makeRequest(url, method, body) {
     return _responceProcessing(res);
   });
 }
+
+export function durationMovieConverter(duration) {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+  return `${hours}ч ${minutes}м`;
+}
+
+export const moviesFilter = (listMovies, query, filter = false) => {
+  // if (!filter) {
+  //   return listMovies.filter((movie) => movie.nameRU.toLowerCase().includes(query.toLowerCase()));
+  // }
+  // return listMovies
+  //   .filter((movie) => movie.nameRU.toLowerCase().includes(query.toLowerCase()))
+  //   .filter((movie) => movie.duration <= SHORT_FILM_DURATION);
+};

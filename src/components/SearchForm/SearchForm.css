@@ -17,6 +17,7 @@
   align-items: center;
   background: var(--btn-color-nav);
   border-radius: 9px;
+  position: relative;
 }
 
 .search__form {
@@ -50,6 +51,19 @@
 
 .search__input:focus {
   background-color: var(--bg-color-main);
+}
+
+.search__error {
+  position: absolute;
+  bottom: 28px;
+  left: -150px;
+  right: 0;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--text-color-errors);
 }
 
 .search__button {
@@ -106,6 +120,11 @@
     display: flex;
     justify-content: space-between;
     background-color: var(--btn-color-nav);
+  }
+
+  .search__error {
+    bottom: 90px;
+    left: 0;
   }
 
   .search__label {
