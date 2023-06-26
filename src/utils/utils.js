@@ -20,14 +20,11 @@ export function makeRequest(url, method, body) {
 export function durationMovieConverter(duration) {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
-  return `${hours}ч ${minutes}м`;
+  if (hours < 1) {
+    return `${minutes}м`
+  } else if (minutes === 0) {
+    return `${hours}ч`
+  } else {
+    return `${hours}ч ${minutes}м`;
+  }
 }
-
-export const moviesFilter = (listMovies, query, filter = false) => {
-  // if (!filter) {
-  //   return listMovies.filter((movie) => movie.nameRU.toLowerCase().includes(query.toLowerCase()));
-  // }
-  // return listMovies
-  //   .filter((movie) => movie.nameRU.toLowerCase().includes(query.toLowerCase()))
-  //   .filter((movie) => movie.duration <= SHORT_FILM_DURATION);
-};

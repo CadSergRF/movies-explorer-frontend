@@ -4,11 +4,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Common/Footer/Footer';
 
-import { movies } from '../../_FAKE/fakeMovies';
 
-const SavedMovies = ({ isLoggedIn, onBurgerOpen }) => {
-  const isSavedMovie = false;
-  const savedMovies = movies.filter((card) => card.saved === true);
+const SavedMovies = ({ isLoggedIn, onBurgerOpen, isLoading, setIsLoading, savedCards, handleDeleteCard }) => {
+
+
   return (
     <>
       <Header
@@ -17,7 +16,13 @@ const SavedMovies = ({ isLoggedIn, onBurgerOpen }) => {
       />
       <main>
         <SearchForm />
-        <MoviesCardList cards={savedMovies} isSavedMovie={isSavedMovie} />
+        <MoviesCardList
+          isCardsFromSaved={true}
+          cards={savedCards}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          handleDeleteCard={handleDeleteCard}
+        />
       </main>
       <Footer />
     </>

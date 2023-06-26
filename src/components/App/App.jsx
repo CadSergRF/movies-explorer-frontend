@@ -25,7 +25,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [savedCards, setSavedCards] = useState([]);
@@ -42,7 +42,7 @@ function App() {
 
   //регистрация пользователя
   const handleUserRegister = async ({ name, email, password }) => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const registerData = await mainApi.register({ name, email, password });
       if (registerData) {
@@ -54,13 +54,13 @@ function App() {
       setErrorMessage(err);
       console.error(err);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }
 
   //авторизация пользователя
   const handleUserLogin = async ({ email, password }) => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const loginData = await mainApi.authorize({ email, password });
       if (loginData) {
@@ -71,12 +71,13 @@ function App() {
       setErrorMessage(err);
       console.error(err);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }
 
   // проверка авторизации
   const checkLogin = useCallback(async () => {
+    setIsLoading(true);
     try {
       const userCokkies = await mainApi.checkCookies();
       setCurrentUser(userCokkies);
@@ -84,6 +85,8 @@ function App() {
       navigate("/movies", { replace: true });
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   }, [navigate])
 
@@ -91,12 +94,19 @@ function App() {
     checkLogin();
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      getSavedCards();
+    }
+  }, [isLoggedIn])
+
   // logout
   const handleUserSignOut = async () => {
     try {
       await mainApi.logout();
       setIsLoggedIn(false);
       setCurrentUser({});
+      localStorage.clear();
       navigate("/", { replace: true });
     } catch (err) {
       console.error(err);
@@ -105,6 +115,7 @@ function App() {
 
   // обновить данные пользователя
   const handleUpdateUser = async (userData) => {
+    setIsLoading(true);
     try {
       const newUserData = await mainApi.updateUserInfo(userData);
       setCurrentUser(newUserData);
@@ -115,12 +126,28 @@ function App() {
     } catch (err) {
       setErrorMessage(err);
       console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const getSavedCards = async () => {
+    setIsLoading(true);
+    try {
+      const dataCards = await mainApi.getSavedMovies();
+      const apiSavedCards = dataCards.filter((c) => c.owner === currentUser._id);
+      setSavedCards(apiSavedCards);
+      localStorage.setItem('savedMovies', JSON.stringify(apiSavedCards))
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false);
     }
   }
 
   const handleSaveCard = async (card) => {
     try {
-      const savedCard = await mainApi.createCard({
+      const newSavedCard = await mainApi.createCard({
         country: card.country,
         director: card.director,
         duration: card.duration,
@@ -133,27 +160,27 @@ function App() {
         nameRU: card.nameRU,
         nameEN: card.nameEN,
       });
-      setSavedCards([savedCard, ...savedCards])
+      setSavedCards([newSavedCard, ...savedCards]);
+      localStorage.setItem('savedMovies', JSON.stringify(savedCards));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   }
 
-  const handleDeleteMovie = async (movie) => {
+  const handleDeleteCard = async (card) => {
     try {
-      const movieOnDelete = savedMovies.find(
-        (m) => m.movieId === (movie.id || movie.movieId)
+      const cardOnDelete = savedCards.find(
+        (c) => c.movieId === (card.id || card.movieId)
       );
-      const deleteMovie = await mainApi.deleteCard(movieOnDelete._id);
-      if (deleteMovie) {
-        const newStateSavedMovies = savedMovies.filter((m) => m.movieId !== movie.id);
-        setSavedMovies(newStateSavedMovies);
+      const deleteCard = await mainApi.deleteCard(cardOnDelete._id);
+      if (deleteCard) {
+        const newStateSavedCards = savedCards.filter((c) => c._id !== cardOnDelete._id);
+        setSavedCards(newStateSavedCards);
+        localStorage.setItem('savedMovies', JSON.stringify(savedCards))
       }
     } catch (error) {
       console.log(error)
     }
-
   }
 
   return (
@@ -174,6 +201,11 @@ function App() {
                 element={Movies}
                 isLoggedIn={isLoggedIn}
                 onBurgerOpen={handleBurgerOpen}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                savedCards={savedCards}
+                handleSaveCard={handleSaveCard}
+                handleDeleteCard={handleDeleteCard}
               />}
           />
           <Route
@@ -183,6 +215,10 @@ function App() {
                 element={SavedMovies}
                 isLoggedIn={isLoggedIn}
                 onBurgerOpen={handleBurgerOpen}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                savedCards={savedCards}
+                handleDeleteCard={handleDeleteCard}
               />}
           />
           <Route

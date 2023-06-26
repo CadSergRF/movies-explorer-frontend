@@ -17,6 +17,12 @@
 }
 
 .card__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  max-width: 240px;
+  min-height: 36px;
   margin: 0;
   font-family: var(--theme-font);
   font-style: normal;
