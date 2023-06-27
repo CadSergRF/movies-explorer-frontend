@@ -1,5 +1,5 @@
-// const BASE_URL_AUTH = 'https://api.movies-csrf.nomoredomains.rocks/api';
-const BASE_URL_AUTH = 'http://localhost:3001/api';
+const BASE_URL_AUTH = 'https://api.movies-csrf.nomoredomains.rocks/api';
+
 
 const FILMS_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 const FILMS_URL_PREVIEW = 'https://api.nomoreparties.co/';
