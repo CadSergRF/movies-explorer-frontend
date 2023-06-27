@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
+import { ERR_EMPTY_QUERY } from '../../utils/messageConstants';
+
 const SearchForm = ({ onSearchMovies, onFilter, isShortMovies }) => {
   const [isQueryErr, setIsQueryErr] = useState(false);
   const [query, setQuery] = useState('');
@@ -19,7 +21,7 @@ const SearchForm = ({ onSearchMovies, onFilter, isShortMovies }) => {
       setIsQueryErr(true);
       setTimeout(() => {
         setIsQueryErr(false);
-      }, 1500);
+      }, 1000);
     } else {
       setIsQueryErr(false);
       onSearchMovies(query);
@@ -27,8 +29,8 @@ const SearchForm = ({ onSearchMovies, onFilter, isShortMovies }) => {
   }
 
   useEffect(() => {
-    if (location.pathname === '/movies' && localStorage.getItem('movieSearch')) {
-      const localQuery = localStorage.getItem('movieSearch');
+    if (location.pathname === '/movies' && localStorage.getItem('queryMovies')) {
+      const localQuery = localStorage.getItem('queryMovies');
       setQuery(localQuery);
     }
   }, [location]);
@@ -54,7 +56,7 @@ const SearchForm = ({ onSearchMovies, onFilter, isShortMovies }) => {
           <button className="search__button" type="submit"></button>
         </form>
         <FilterCheckbox onFilter={onFilter} isShortMovies={isShortMovies} />
-        {isQueryErr && <span className="search__error">Нужно ввести запрос</span>}
+        {isQueryErr && <span className="search__error">{ERR_EMPTY_QUERY}</span>}
       </div>
       <div className="spacer"></div>
     </section>

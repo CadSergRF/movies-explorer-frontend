@@ -46,15 +46,17 @@ const MoviesCard = ({ saved, isCardsFromSaved, card, savedCards, onSaveCard, onD
           )
           }
         </div>
-        <img
-          className="card__image"
-          alt={card.nameRU}
-          src={
-            location.pathname === "/movies"
-              ? `${FILMS_URL_PREVIEW}${card.image.url}`
-              : `${card.image}`
-          }
-        />
+        <a href={card.trailerLink} target="_blank" rel="noreferrer">
+          <img
+            className="card__image"
+            alt={card.nameRU}
+            src={
+              location.pathname === "/movies"
+                ? `${FILMS_URL_PREVIEW}${card.image.url}`
+                : `${card.image}`
+            }
+          />
+        </a>
       </article>
     </li>
   )
