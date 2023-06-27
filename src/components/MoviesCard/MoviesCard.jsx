@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { durationMovieConverter } from '../../utils/utils';
 import { FILMS_URL_PREVIEW } from '../../utils/constants';
 
-const MoviesCard = ({ saved, isCardsFromSaved, card, savedCards, onSaveCard, onDeleteCard }) => {
+const MoviesCard = ({ saved, isCardsFromSaved, card, onSaveCard, onDeleteCard }) => {
 
   const location = useLocation();
 

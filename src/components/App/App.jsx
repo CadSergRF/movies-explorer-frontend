@@ -40,6 +40,18 @@ function App() {
     setIsBurgerOpen(false)
   }
 
+  const getSavedCards = async () => {
+    try {
+      const dataCards = await mainApi.getSavedMovies();
+      if (dataCards) {
+        setSavedCards(dataCards);
+        localStorage.setItem('savedMovies', JSON.stringify(dataCards))
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   //регистрация пользователя
   const handleUserRegister = async ({ name, email, password }) => {
     setIsLoading(true);
@@ -80,9 +92,11 @@ function App() {
     setIsLoading(true);
     try {
       const userCokkies = await mainApi.checkCookies();
-      setCurrentUser(userCokkies);
-      setIsLoggedIn(true);
-      navigate("/movies", { replace: true });
+      if (userCokkies) {
+        setCurrentUser(userCokkies);
+        setIsLoggedIn(true);
+        navigate("/movies", { replace: true });
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -118,28 +132,16 @@ function App() {
     setIsLoading(true);
     try {
       const newUserData = await mainApi.updateUserInfo(userData);
-      setCurrentUser(newUserData);
-      setIsSuccess(true);
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000);
+      if (newUserData) {
+        setCurrentUser(newUserData);
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 3000);
+      }
     } catch (err) {
       setErrorMessage(err);
       console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  const getSavedCards = async () => {
-    setIsLoading(true);
-    try {
-      const dataCards = await mainApi.getSavedMovies();
-      const apiSavedCards = dataCards.filter((c) => c.owner === currentUser._id);
-      setSavedCards(apiSavedCards);
-      localStorage.setItem('savedMovies', JSON.stringify(apiSavedCards))
-    } catch (err) {
-      console.log(err)
     } finally {
       setIsLoading(false);
     }
@@ -160,8 +162,10 @@ function App() {
         nameRU: card.nameRU,
         nameEN: card.nameEN,
       });
-      setSavedCards([newSavedCard, ...savedCards]);
-      localStorage.setItem('savedMovies', JSON.stringify(savedCards));
+      if (newSavedCard) {
+        setSavedCards([newSavedCard, ...savedCards]);
+        localStorage.setItem('savedMovies', JSON.stringify(savedCards));
+      }
     } catch (error) {
       console.log(error);
     }

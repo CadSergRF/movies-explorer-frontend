@@ -37,7 +37,8 @@ const Profile = ({ onEditProfile, onSignOut, onLoading, isLoggedIn, onBurgerOpen
         onBurgerOpen={onBurgerOpen}
       />
       <main className="profile">
-        <h3 className="profile__title">Привет, {values.name}!</h3>
+        {/* <h3 className="profile__title">Привет, {values.name}!</h3> */}
+        <h3 className="profile__title">Привет, {currentUserData.name}!</h3>
         <form className="profile__form">
           <div className="profile__inputs">
             <label className="profile__field">

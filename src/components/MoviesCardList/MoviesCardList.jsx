@@ -3,7 +3,9 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader'
+import Preloader from '../Preloader/Preloader';
+import SearchMovieErr from '../SearchMovieErr/SearchMovieErr';
+import { ERR_REQ_MESSAGE, ERR_NOT_FOUND } from '../../utils/messageConstants';
 import {
   RES_BIG,
   RES_MIDDLE,
@@ -14,7 +16,7 @@ import {
   ADD_RES_MIDDLE,
 } from '../../utils/constants';
 
-const MoviesCardList = ({ isCardsFromSaved, cards, savedCards, isLoading, errReq, handleSaveCard, handleDeleteCard }) => {
+const MoviesCardList = ({ isCardsFromSaved, cards, savedCards, isLoading, errReq, isNotFound, handleSaveCard, handleDeleteCard }) => {
   const location = useLocation();
 
   const [quantityLoad, setQuantityLoad] = useState(0);
@@ -66,7 +68,9 @@ const MoviesCardList = ({ isCardsFromSaved, cards, savedCards, isLoading, errReq
   return (
     <section className="cards">
       {isLoading && <Preloader />}
-      {!isLoading && (
+      {!isLoading && errReq && <SearchMovieErr errorText={ERR_REQ_MESSAGE} />}
+      {!isLoading && isNotFound && <SearchMovieErr errorText={ERR_NOT_FOUND} />}
+      {!isLoading && !errReq && !isNotFound && (
         <>
           {location.pathname === "/saved-movies" ? (
 
@@ -91,7 +95,6 @@ const MoviesCardList = ({ isCardsFromSaved, cards, savedCards, isLoading, errReq
                     saved={getSavedCard(savedCards, card)}
                     isCardsFromSaved={isCardsFromSaved}
                     card={card}
-                    savedCards={savedCards}
                     onSaveCard={handleSaveCard}
                     onDeleteCard={handleDeleteCard}
                   />
@@ -108,9 +111,7 @@ const MoviesCardList = ({ isCardsFromSaved, cards, savedCards, isLoading, errReq
               </div>
             </>
           )
-
           }
-
         </>
       )
       }

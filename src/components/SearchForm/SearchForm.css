@@ -53,6 +53,15 @@
   background-color: var(--bg-color-main);
 }
 
+.search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background-image: url('../../images/input-clear.svg');
+  background-size: 16px 16px;
+}
+
 .search__error {
   position: absolute;
   bottom: 28px;

@@ -11,30 +11,12 @@ import { handleFilterShort, handleFilterMovies } from '../../utils/utils';
 
 const Movies = ({ isLoggedIn, onBurgerOpen, isLoading, setIsLoading, savedCards, handleSaveCard, handleDeleteCard }) => {
 
-  const [allMoviesCards, setAllMoviesCards] = useState([]); // стейт со свеми карточками из beatsfilms
   const [queriedMoviesCards, setQueriedMoviesCards] = useState([]); // стейт карточек по запросу
   const [shortsMoviesCards, setShortsMoviesCards] = useState([]); // стейт с фильтром Shorts
 
   const [errReq, setErrReq] = useState(false); // ошибка запроса
   const [isNotFound, setIsNotFound] = useState(false); // ничего не найдено
   const [isShortMovies, setIsShortMovies] = useState(false); // чекбокс поиска
-
-  // запрос к beats-films
-  const getAllMovies = async () => {
-    setIsLoading(true);
-    try {
-      const initialCards = await moviesApi.getCards();
-      setAllMoviesCards(initialCards);
-      localStorage.setItem('allMovies', JSON.stringify(initialCards));
-    } catch (error) {
-      setErrReq(true)
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 3000)
-
-    }
-  }
 
   // фильтруем по запросу и чекбоксу и записываем в стейты
   const handleFilterCards = (cards, query, short) => {
@@ -56,21 +38,30 @@ const Movies = ({ isLoggedIn, onBurgerOpen, isLoading, setIsLoading, savedCards,
   }
 
   // получаем начальный массив (из LS если нет то в апи) и отправляем на фильтр
-  const handleSearchMovies = (query) => {
-    console.log("Запрос " + query)
+  const handleSearchMovies = async (query) => {
     localStorage.setItem('queryMovies', query);
     localStorage.setItem('shortFilterMovies', isShortMovies);
 
     if (localStorage.getItem('allMovies')) {
       const cardsFromLS = JSON.parse(localStorage.getItem('allMovies'));
-      console.log("карточки из LS получены");
       handleFilterCards(cardsFromLS, query, isShortMovies);
       return;
     }
+    setIsLoading(true);
+    try {
+      const initialCards = await moviesApi.getCards();
+      if (initialCards) {
+        localStorage.setItem('allMovies', JSON.stringify(initialCards));
+        handleFilterCards(initialCards, query, isShortMovies);
+      }
+    } catch (error) {
+      setErrReq(true)
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 3000)
 
-    console.log("Запрос на beats-movies");
-    getAllMovies();
-    handleFilterCards(allMoviesCards, query, isShortMovies);
+    }
   }
 
   // состояние чека при загрузке
