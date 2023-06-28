@@ -1,0 +1,12 @@
+.root {
+  box-sizing: border-box;
+  background-color: var(--bg-color-main);
+  min-height: 100vh;
+  margin: 0 auto;
+  max-width: 1280px;
+  min-width: 310px;
+  width: 100%;
+  font-family: var(--theme-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

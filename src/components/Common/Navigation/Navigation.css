@@ -1,0 +1,60 @@
+.navigation__movies {
+  display: flex;
+  gap: 16px;
+}
+
+.navigation__link {
+  font-family: var(--theme-font);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: var(--text-color-main);
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__btn {
+  width: 100px;
+  height: 32px;
+  border-radius: 20px;
+  background-color: var(--btn-color-nav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: var(--theme-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--text-color-main);
+}
+
+.burger-menu {
+  display: none;
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: url("../../../images/burger-icon.svg") center center/cover no-repeat;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 770px) {
+  .navigation__movies {
+    display: none;
+  }
+
+  .navigation__btn {
+    display: none;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+}

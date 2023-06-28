@@ -1,0 +1,48 @@
+.nav-tab {
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 96px);
+  gap: 10px;
+  justify-content: center;
+  align-content: center;
+  list-style: none;
+}
+
+.nav-tab__btn {
+  width: 96px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: var(--bg-color-second);
+  color: var(--text-color-main);
+  text-decoration: none;
+  font-family: var(--theme-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-tab__btn:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 420px) {
+  .nav-tab {
+    grid-template-columns: repeat(auto-fit, 82px);
+    gap: 6px;
+  }
+
+  .nav-tab__btn {
+    width: 82px;
+    height: 26px;
+    border-radius: 6px;
+    font-size: 10px;
+  }
+}
